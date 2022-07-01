@@ -38,6 +38,13 @@
                 h1.innerHTML = "x: " + e.clientX + " y: " + e.clientY;
                 cursor.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)";
             }
+
+            // 자연스러운 움직임을 위한 재귀 호출
+            loop();
+        }
+
+        function loop() {
+            window.requestAnimationFrame(loop);
         }
     </script>
 </head>
