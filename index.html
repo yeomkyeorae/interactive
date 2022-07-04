@@ -27,16 +27,24 @@
         }
     </style>
     <script>
+        let cursor;
+        let h1;
+
+        let x = 0;
+        let y = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        let speed = 0.05;
+
         // window.onload 화면이 다 로드가 된 후에 실행하라는 뜻
         window.onload = function () {
-            let h1 = document.getElementsByTagName("h1")[0];
-            let cursor = document.getElementsByClassName("cursor_item")[0];
-
+            h1 = document.getElementsByTagName("h1")[0];
+            cursor = document.getElementsByClassName("cursor_item")[0];
             window.addEventListener("mousemove", mouseFunc, false);
 
             function mouseFunc(e) {
-                h1.innerHTML = "x: " + e.clientX + " y: " + e.clientY;
-                cursor.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)";
+                x = e.clientX;
+                y = e.clientY;
             }
 
             // 자연스러운 움직임을 위한 재귀 호출
@@ -44,6 +52,12 @@
         }
 
         function loop() {
+            mouseX += (x - mouseX) * speed; // 공식?
+            mouseY += (y - mouseY) * speed;
+
+            h1.innerHTML = "x: " + x + " mouseX: " + mouseX;
+
+            cursor.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
             window.requestAnimationFrame(loop);
         }
     </script>
