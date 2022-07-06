@@ -11,6 +11,7 @@
             position: relative;
             background-color: black;
             cursor: none;
+            overflow: hidden;
         }
 
         h1 {
@@ -45,9 +46,23 @@
             font-size: 60px;
             padding: 80px 150px;
         }
+
+        .human {
+            position: absolute;
+            width: 500px;
+            left: calc(50% - 250px);
+            z-index: 100;
+        }
+
+        .bg {
+            position: absolute;
+            width: 1000px;
+            left: calc(50% - 500px);
+        }
     </style>
     <script>
-        let cursor;
+        let human;
+        let bg;
         let h1;
 
         let x = 0;
@@ -59,34 +74,38 @@
         // window.onload 화면이 다 로드가 된 후에 실행하라는 뜻
         window.onload = function () {
             h1 = document.getElementsByTagName("h1")[0];
-            cursor = document.getElementsByClassName("cursor_item")[0];
-            window.addEventListener("click", mouseFunc, false);
+            human = document.getElementsByClassName("human")[0];
+            bg = document.getElementsByClassName("bg")[0];
+            window.addEventListener("mousemove", mouseFunc, false);
 
             function mouseFunc(e) {
-                x = e.clientX;
-                y = e.clientY;
-                cursor.style.transform = "translate(" + x + "px," + y + "px)";
+                x = (e.clientX - window.innerWidth / 3);
+                y = (e.clientY - window.innerHeight / 3);
             }
 
             // 자연스러운 움직임을 위한 재귀 호출
-            // loop();
+            loop();
         }
 
-        // function loop() {
-        //    mouseX += (x - mouseX) * speed; // 공식?
-        //    mouseY += (y - mouseY) * speed;
+        function loop() {
+            mouseX += (x - mouseX) * speed; // 공식?
+            mouseY += (y - mouseY) * speed;
 
-        //    h1.innerHTML = "x: " + x + " mouseX: " + mouseX;
+            h1.innerHTML = "x: " + x + " mouseX: " + mouseX;
 
-        //    cursor.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
-        //    window.requestAnimationFrame(loop);
-        //}
+            human.style.transform = "translate(" + -(mouseX / 6) + "px," + -(mouseY / 6) + "px)";
+            bg.style.transform = "translate(" + (mouseX / 6) + "px," + (mouseY / 6) + "px)";
+            window.requestAnimationFrame(loop);
+        }
     </script>
 </head>
 
 <body>
-    <div class="cursor_item"></div>
-    <button type="button">Start</button>
+    <h1>test</h1>
+    <!-- <div class="cursor_item"></div>
+    <button type="button">Start</button> -->
+    <img src="./resource/dami.jpg" class="human" alt="person">
+    <img src="./resource/layer-1.jpg" class="bg" alt="background">
 </body>
 
 </html>
