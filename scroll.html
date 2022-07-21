@@ -9,6 +9,7 @@
     <style>
         body {
             /** height: 1000px;*/
+            overflow-x: hidden;
             background: linear-gradient(150deg, red, orange, yellow, green, indigo, purple, black);
         }
 
@@ -37,22 +38,83 @@
         }
 
         section {
+            position: relative;
             width: 400px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.94);
             margin: 30px auto;
-            padding: 20px;
+            padding: 10px 20px;
+            z-index: 100;
         }
 
         p {
-            color: #555;
+            color: #eee;
+            font-size: 15px;
+        }
+
+        .cloud-wrap {
+            position: absolute;
+        }
+
+        .cloud-wrap img {
+            position: absolute;
+            width: 400px;
+            top: 0;
+            left: 0;
+        }
+
+        .cloud-wrap img:nth-child(1) {
+            top: -100px;
+            left: 500px;
+        }
+
+        .cloud-wrap img:nth-child(2) {
+            top: 800px;
+            left: 0px;
+        }
+
+        .cloud-wrap img:nth-child(3) {
+            top: 1800px;
+            left: 400px;
+        }
+
+        .cloud-wrap img:nth-child(4) {
+            top: 3000px;
+            left: -100px;
+        }
+
+        .cloud-wrap img:nth-child(5) {
+            top: 4200px;
+            left: 500px;
+        }
+
+        .cloud-wrap img:nth-child(6) {
+            top: 5900px;
+            left: -140px;
+        }
+
+        .cloud-wrap img:nth-child(7) {
+            top: 7000px;
+            left: 500px;
+        }
+
+        .cloud-wrap img:nth-child(8) {
+            top: 8000px;
+            left: -190px;
+        }
+
+        .cloud-wrap img:nth-child(9) {
+            top: 9000px;
+            left: 500px;
         }
     </style>
     <script>
         let scrollTop = 0;
         let bar;
+        let cloudWrap;
 
         window.onload = () => {
             bar = document.getElementsByClassName("bar")[0];
+            cloudWrap = document.getElementsByClassName("cloud-wrap")[0];
         }
 
         window.addEventListener("scroll", e => {
@@ -63,6 +125,8 @@
             let percent = Math.ceil(scrollTop / (document.body.scrollHeight - window.outerHeight) * 100);
 
             bar.style.height = percent + "%";
+            // scrollTop 값에 상수를 나눔으로써 cloud-wrap element가 늦게 스크롤 되는 것 같은 효과를 가진다
+            cloudWrap.style.transform = "translate(0, " + scrollTop / 1.2 + "px)";
         }, false);
     </script>
 </head>
@@ -71,8 +135,16 @@
     <div class="progress">
         <span class="bar"></span>
     </div>
-    <div>
-        <img src="./resource/cloud.png" alt="">
+    <div class="cloud-wrap">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
+        <img src="./resource/cloud.png" alt="구름">
     </div>
     <section>
         <h1>제목</h1>
